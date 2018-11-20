@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.szl.tupu.dao.PaperDao">
+    <resultMap id="BaseResultMap" type="com.cn.szl.tupu.entity.Paper">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="date" property="date"/>
+        <result column="keywords" property="keywords"/>
+        <result column="summary" property="summary"/>
+        <result column="school" property="school"/>
+        <result column="degree" property="degree"/>
+        <result column="major" property="major"/>
+        <result column="tutor" property="tutor"/>
+        <result column="url" property="url"/>
+        <result column="web" property="web"/>
+        <result column="label" property="label"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, author, date, keywords,summary,school,degree,major,tutor,url,web,label
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM papers_predict_label
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM papers_predict_label
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.cn.szl.tupu.entity.Paper">
+       INSERT INTO 
+       		papers_predict_label
+       		(id, author, date, keywords,summary,school,degree,major,tutor,url,web,label)
+       	VALUES
+       		(#{id}, #{author}, #{date}, #{keywords}, #{summary}, #{school}, #{degree}, #{major}, #{tutor}, #{url}, #{web},#{label})
+    </insert>
+
+    <update id="update" parameterType="com.cn.szl.tupu.entity.Paper">
+        UPDATE
+        knowledge
+        SET
+        <if test="knowledgeName != null">knowledge_name = #{knowledgeName},</if>
+        <if test="level != null">knowledge_level = #{knowledgeLevel},</if>
+        WHERE
+        knowledge_id = #{knowledgeId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+       DELETE FROM
+       		 papers_predict_label
+       WHERE 
+       		 id =#{id}
+    </delete>
+
+    <select id="listPaper"  resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM papers_predict_label
+        WHERE label = #{label} LIMIT #{page},#{pageSize}
+    </select>
+
+</mapper>

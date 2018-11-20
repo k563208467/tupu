@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.szl.tupu.dao.KnowledgeDao">
+    <resultMap id="BaseResultMap" type="com.cn.szl.tupu.entity.Knowledge">
+        <id column="knowledge_id" property="knowledgeId"/>
+        <result column="knowledge_name" property="KnowledgeName"/>
+        <result column="knowledge_time" property="KnowledgeTime"/>
+        <result column="knowledge_level" property="knowledgeLevel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        knowledge_id, knowledge_name, knowledge_time, knowledge_level
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM knowledge
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM knowledge
+        WHERE knowledge_id = #{knowledgeId}
+    </select>
+
+    <insert id="insert" parameterType="com.cn.szl.tupu.entity.Knowledge">
+       INSERT INTO 
+       		knowledge
+       		(knowledge_name,knowledge_time,knowledge_level)
+       	VALUES
+       		(#{knowledgeName}, #{knowledgeTime}, #{knowledgeLevel})
+    </insert>
+
+    <update id="update" parameterType="com.cn.szl.tupu.entity.Knowledge">
+        UPDATE
+        knowledge
+        SET
+        <if test="knowledgeName != null">knowledge_name = #{knowledgeName},</if>
+        <if test="level != null">knowledge_level = #{knowledgeLevel},</if>
+        WHERE
+        knowledge_id = #{knowledgeId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+       DELETE FROM
+       		 knowledge
+       WHERE 
+       		 knowledge_id =#{knowledgeId}
+    </delete>
+
+    <select id="getByNameAndLevel" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM knowledge
+        WHERE knowledge_name = #{knowledgeName} AND knowledge_level = #{knowledgeLevel}
+    </select>
+
+
+
+</mapper>
