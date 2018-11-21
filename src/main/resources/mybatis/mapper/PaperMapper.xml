@@ -27,12 +27,12 @@
         FROM papers_predict_label
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM papers_predict_label
-        WHERE id = #{id}
-    </select>
+    <!--<select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--FROM papers_predict_label-->
+        <!--WHERE id = #{id}-->
+    <!--</select>-->
 
     <insert id="insert" parameterType="com.cn.szl.tupu.entity.Paper">
        INSERT INTO 

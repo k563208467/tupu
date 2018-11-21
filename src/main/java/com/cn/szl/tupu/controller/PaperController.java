@@ -5,10 +5,7 @@ import com.cn.szl.tupu.entity.Result;
 import com.cn.szl.tupu.servive.IPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -23,41 +20,57 @@ import java.util.ArrayList;
  * \
  */
 @RestController
-@RequestMapping("paper")
+@RequestMapping("/paper")
 public class PaperController {
 
     @Autowired
-    private IPaperService service;
+    private IPaperService iPaperService;
 
     @RequestMapping("/list")
     public Result list(String label,int page,int pageSize){
-        return Result.ok(service.listPaper(label,page,pageSize));
+        return Result.ok(iPaperService.listPaper(label,page,pageSize));
     }
 
-
+    @ResponseBody
     @GetMapping("/ajaxSearch")
-    public String ajaxSearch(@RequestParam(value="key",required = false) String key, ModelMap model){
-        ArrayList<Paper> list = (ArrayList<Paper>) service.findByKeyword(key);
+    public ModelMap ajaxSearch(@RequestParam(value="key",required = false) String key, ModelMap model){
+        ArrayList<Paper> list = (ArrayList<Paper>) iPaperService.findByKeyword(key);
 //        for(Paper paper:list){
 //
 //        }
-        System.out.println(list);
         model.addAttribute("key",key);
         model.addAttribute("papers",list);
 //        model.setViewName("addTask");
-        return "addTask";
+//        return "addTask";
+        return model;
     }
 
     @GetMapping("/search")
     public ModelAndView search(@RequestParam(value="key",required = false) String key, ModelAndView model){
-        ArrayList<Paper> list = (ArrayList<Paper>) service.findByKeyword(key);
+        ArrayList<Paper> list = (ArrayList<Paper>) iPaperService.findByKeyword(key);
 //        for(Paper paper:list){
 //
 //        }
-        System.out.println(list);
         model.addObject("key",key);
         model.addObject("papers",list);
-        model.setViewName("addTask");
+        model.setViewName("paper/ajaxSearch");
+        return model;
+    }
+
+    @GetMapping("/details")
+    public ModelAndView showDetails(@RequestParam(value="id",required = false) int id,ModelAndView model){
+        Paper paper = iPaperService.getById(id);
+        model.addObject("title",paper.getTitle());
+        model.addObject("author",paper.getAuthor());
+        model.addObject("date",paper.getDate());
+        model.addObject("keywords",paper.getKeywords());
+        model.addObject("summary",paper.getSummary());
+        model.addObject("school",paper.getSchool());
+        model.addObject("degree",paper.getDegree());
+        model.addObject("major",paper.getMajor());
+        model.addObject("tutor",paper.getTutor());
+        model.addObject("url",paper.getUrl());
+        model.setViewName("post");
         return model;
     }
 

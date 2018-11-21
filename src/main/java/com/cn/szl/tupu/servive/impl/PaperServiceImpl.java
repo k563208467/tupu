@@ -38,7 +38,7 @@ public class PaperServiceImpl implements IPaperService {
 
     @Override
     public Paper getById(int knowledgeId) {
-        return null;
+        return paperDao.getById(knowledgeId);
     }
 
     @Override

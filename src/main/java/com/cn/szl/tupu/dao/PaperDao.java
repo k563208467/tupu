@@ -17,6 +17,7 @@ import java.util.List;
 @Component
 public interface PaperDao{
 
+    @Select("select * from papers_predict_label where id = #{id}")
     Paper getById(int id);
 
     void insert(Paper paper);
@@ -29,8 +30,9 @@ public interface PaperDao{
 
     List<Paper> findByLabel(String label);
 
-    @Select("select title,author,keywords,date,label from papers_predict_label where keywords or title like CONCAT('%',#{key},'%')")
+    @Select("select title,author,keywords,date,label,id from papers_predict_label where keywords or title like CONCAT('%',#{key},'%')")
     List<Paper> findByKeyword(String keyword);
+
 
     void saveAndFlush(Paper paper);
 }
