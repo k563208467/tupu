@@ -27,7 +27,7 @@ public class MainController {
 
     @RequestMapping("/main/post")
     public String post(){
-        return "";
+        return "creategraph";
     }
 
     @RequestMapping("/main/addNew")

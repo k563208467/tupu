@@ -3873,8 +3873,9 @@ input[type="button"].btn-block {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding-left: 0;
-  margin-bottom: 0;
+  margin-bottom: 10px;
   list-style: none;
+
 }
 
 .nav-link {

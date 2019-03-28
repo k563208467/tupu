@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
   <head>
 
@@ -25,6 +25,16 @@
     <link href="startbootstrap-creative-gh-pages/css/creative.min.css" rel="stylesheet">
     <script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/echarts.js}"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
     <script type="text/javascript">
         $(function(){
             $("#search").click(function(){
@@ -85,7 +95,7 @@
           </div>
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">The System of Electromagnetic Knowledge Map</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="/main/addTask">开启作战任务</a>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="/main/post">开启作战任务</a>
             <a class="btn btn-primary btn-xl js-scroll-trigger" style="margin-left:50px" href="#searchSection">电磁知识检索</a>
 
           </div>
@@ -99,7 +109,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+            <h1 class="mb-5">电磁知识库信息检索</h1>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form class="form-horizontal" th:action="@{/paper/search}" method="get"
@@ -118,48 +128,57 @@
       </div>
     </section>
 
-    <section id="services">
+    <!--<section id="networks" >-->
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">At Your Service</h2>
-            <hr class="my-4">
+          <div class="col-lg-12 text-center col-xl-12 mx-auto" id="network" style="height:750px;width:1000px" >
           </div>
         </div>
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-1"></i>
-              <h3 class="mb-3">Sturdy Templates</h3>
-              <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-2"></i>
-              <h3 class="mb-3">Ready to Ship</h3>
-              <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-code text-primary mb-3 sr-icon-3"></i>
-              <h3 class="mb-3">Up to Date</h3>
-              <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
-              <h3 class="mb-3">Made with Love</h3>
-              <p class="text-muted mb-0">You have to make your websites with love these days!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!--</section>-->
+    <svg></svg>
+    <!--<section id="services">-->
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-lg-12 text-center">-->
+            <!--<h2 class="section-heading">At Your Service</h2>-->
+            <!--<hr class="my-4">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-lg-3 col-md-6 text-center">-->
+            <!--<div class="service-box mt-5 mx-auto">-->
+              <!--<i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-1"></i>-->
+              <!--<h3 class="mb-3">Sturdy Templates</h3>-->
+              <!--<p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-lg-3 col-md-6 text-center">-->
+            <!--<div class="service-box mt-5 mx-auto">-->
+              <!--<i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-2"></i>-->
+              <!--<h3 class="mb-3">Ready to Ship</h3>-->
+              <!--<p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-lg-3 col-md-6 text-center">-->
+            <!--<div class="service-box mt-5 mx-auto">-->
+              <!--<i class="fas fa-4x fa-code text-primary mb-3 sr-icon-3"></i>-->
+              <!--<h3 class="mb-3">Up to Date</h3>-->
+              <!--<p class="text-muted mb-0">We update dependencies to keep things fresh.</p>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-lg-3 col-md-6 text-center">-->
+            <!--<div class="service-box mt-5 mx-auto">-->
+              <!--<i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>-->
+              <!--<h3 class="mb-3">Made with Love</h3>-->
+              <!--<p class="text-muted mb-0">You have to make your websites with love these days!</p>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</section>-->
 
     <section class="bg-dark text-white">
       <div class="container text-center">
@@ -290,8 +309,292 @@
       </div>
     </section>
 
+    <script>
+
+    </script>
+
+    <!--<script type="text/javascript">-->
+<!--//            $(function(){-->
+<!--//                  $("#getAll_btn").on("click",function() {-->
+<!--//                    $.ajax({-->
+<!--//                        type:"post",-->
+<!--//                        url:"entity/getAll",-->
+<!--//                        data:{},-->
+<!--//                        dataType:"json",-->
+<!--//                        success:function(result) {-->
+<!--//                            console.log(result);-->
+<!--//                        }-->
+<!--//                    });-->
+<!--//                  });-->
+<!--//            });-->
+<!--//            $.get("entity/getAll",-->
+<!--//                function(data) {-->
+<!--//                    alert("ID:" + data.id + "\nName:" + data.name);-->
+<!--//                });-->
+<!--//        var svg_4 = d3.select("network")-->
+<!--//            .append("svg")-->
+<!--//            .attr("width", width_2)-->
+<!--//            .attr("height", height_2);-->
+        <!--$.get("entity/getAll").then(function(dataJson){-->
+            <!--//GroupExplorer constructing function-->
+            <!--//this is one way to create a javascript object-->
+            <!--function GroupExplorer(data){-->
+                <!--//create an object-include some data-->
+                <!--//this is an another way to create a javascript object-->
+                <!--var defaultConfig = {-->
+                    <!--data:{"nodes":[],"links":[]},//critical data set-->
+                    <!--windowWidth:window.innerWidth,-->
+                    <!--windowHeight:window.innerHeight,-->
+                    <!--defaultLinkDistance:150-->
+                <!--}-->
+                <!--//because the initial "data" is null,-->
+                <!--//so you need use jquery syntax "extend" to merge the json data-->
+                <!--//below,merge "data" into "defaultWindow"-->
+                <!--//"true" mean do not cover-->
+                <!--//details see jquery API document-->
+                <!--$.extend(true,defaultConfig,data);-->
+                <!--//so now we get the json file that we need-->
+                <!--//now let`s begin,transform json file to force graph data-->
+                <!--//but first ,we need to get "svg"-->
+                <!--var svg = d3.select("svg");-->
+                <!--svg.attr("width",defaultConfig.windowWidth);-->
+                <!--svg.attr("height",defaultConfig.windowHeight);-->
+                <!--defaultConfig.data.links.forEach(function(e){-->
+                    <!--if(typeof e.source=="number"&&typeof e.target=="number"){-->
+                        <!--var sourceNode = defaultConfig.data.nodes.filter(function(n){-->
+                            <!--return n.id === e.source;-->
+                        <!--})[0];-->
+                        <!--var targetNode = defaultConfig.data.nodes.filter(function(n){-->
+                            <!--return n.id === e.target;-->
+                        <!--})[0];-->
+                        <!--e.source = sourceNode;-->
+                        <!--e.target = targetNode;-->
+                    <!--}-->
+                <!--});-->
+                <!--//create a force graph-->
+                <!--var forceSimulation = d3.forceSimulation()-->
+                    <!--.force("link",d3.forceLink())-->
+                    <!--.force("charge",d3.forceManyBody())-->
+                    <!--.force("center",d3.forceCenter(defaultConfig.windowWidth/2,defaultConfig.windowHeight/2));-->
+                <!--//transform nodes data-->
+                <!--forceSimulation.nodes(defaultConfig.data.nodes)-->
+                    <!--.on("tick",ticked);-->
+                <!--//tranform links data-->
+                <!--forceSimulation.force("link")-->
+                    <!--.links(defaultConfig.data.links)-->
+                    <!--.distance(defaultConfig.defaultLinkDistance);-->
+                <!--console.log(defaultConfig.data.nodes);-->
+                <!--console.log(defaultConfig.data.links);-->
+                <!--//define arrow-->
+                <!--svg.append("svg:defs")-->
+                    <!--.append("svg:marker")-->
+                    <!--.attr("id", "marker")-->
+                    <!--.attr('viewBox', '0 -5 10 10')-->
+                    <!--.attr("refX", 20)-->
+                    <!--.attr("refY",0)-->
+                    <!--.attr('markerWidth', 10)-->
+                    <!--.attr('markerHeight', 10)-->
+                    <!--.attr('orient', 'auto')-->
+                    <!--.append('svg:path')-->
+                    <!--.attr('d', 'M0,-5L10,0L0,5')-->
+                    <!--.attr("fill","brown");-->
+                <!--//draw links-->
+                <!--var links = svg.append("g")-->
+                    <!--.selectAll("line")-->
+                    <!--.data(defaultConfig.data.links)-->
+                    <!--.enter()-->
+                    <!--.append("line")-->
+                    <!--.attr("x1",function(n){return n.source.x})-->
+                    <!--.attr("y1",function(n){return n.source.y})-->
+                    <!--.attr("x2",function(n){return n.target.x})-->
+                    <!--.attr("y2",function(n){return n.target.y})-->
+                    <!--.attr("stroke","brown")-->
+                    <!--.attr("stroke-width",1)-->
+                    <!--.attr("marker-end","url(#marker)");-->
+                <!--//draw links-text-->
+                <!--var links_text = svg.append("g")-->
+                    <!--.selectAll("text")-->
+                    <!--.data(defaultConfig.data.links)-->
+                    <!--.enter()-->
+                    <!--.append("text")-->
+                    <!--.attr("x",function(e){-->
+                        <!--return (e.source.x+e.target.x)/2;-->
+                    <!--})-->
+                    <!--.attr("y",function(e){-->
+                        <!--console.log(e.source.y+"+"+e.target.y)-->
+                        <!--return (e.source.y+e.target.y)/2;-->
+                    <!--})-->
+                    <!--.attr("font-size",10)-->
+                    <!--.text(function(e){return e.type});-->
+                <!--//draw nodes group = node+node-text-->
+                <!--var nodes_g = svg.append("g")-->
+                    <!--.selectAll("g")-->
+                    <!--.data(defaultConfig.data.nodes)-->
+                    <!--.enter()-->
+                    <!--.append("g")-->
+                    <!--.attr("transform",function(e){-->
+                        <!--return "translate("+e.x+","+e.y+")";-->
+                    <!--})-->
+                    <!--.call(d3.drag()-->
+                        <!--.on("start",started)-->
+                        <!--.on("drag",dragged)-->
+                        <!--.on("end",ended));-->
+                <!--//draw nodes-->
+                <!--nodes_g.append("circle")-->
+                    <!--.attr("r",10)-->
+                    <!--.attr("fill","blue");-->
+                <!--//draw node-text-->
+                <!--nodes_g.append("text")-->
+                    <!--.attr("x",-15)-->
+                    <!--.attr("y",20)-->
+                    <!--.attr("font-size",10)-->
+                    <!--.text(function(e){return e.name});-->
+                <!--function started(d){-->
+                    <!--if(!d3.event.active){-->
+                        <!--forceSimulation.alphaTarget(0.8).restart();-->
+                    <!--}-->
+                    <!--d.fx = d.x;-->
+                    <!--d.fy = d.y;-->
+                <!--}-->
+                <!--function dragged(d){-->
+                    <!--d.fx = d3.event.x;-->
+                    <!--d.fy = d3.event.y;-->
+                <!--}-->
+                <!--function ended(d) {-->
+                    <!--if(!d3.event.active){-->
+                        <!--forceSimulation.alphaTarget(0);-->
+                    <!--}-->
+                    <!--d.fx = null;-->
+                    <!--d.fy = null;-->
+                <!--}-->
+                <!--function ticked(){-->
+                    <!--links-->
+                        <!--.attr("x1",function(n){return n.source.x})-->
+                        <!--.attr("y1",function(n){return n.source.y})-->
+                        <!--.attr("x2",function(n){return n.target.x})-->
+                        <!--.attr("y2",function(n){return n.target.y})-->
+                    <!--links_text-->
+                        <!--.attr("x",function(e){-->
+                            <!--return (e.source.x+e.target.x)/2;-->
+                        <!--})-->
+                        <!--.attr("y",function(e){-->
+                            <!--return (e.source.y+e.target.y)/2;-->
+                        <!--})-->
+                    <!--nodes_g-->
+                        <!--.attr("transform",function(e){-->
+                            <!--return "translate("+e.x+","+e.y+")";-->
+                        <!--})-->
+                <!--}-->
+            <!--}-->
+            <!--//because in the way of creating a javascript object,-->
+            <!--//you need to use "new" to use it-->
+            <!--new GroupExplorer({data:dataJson});-->
+        <!--})-->
+    <!--</script>-->
+
+
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var dom = document.getElementById("network");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        myChart.showLoading();
+        $.get('/data/les-miserables.gexf', function (xml) {
+            myChart.hideLoading();
+
+            var graph = echarts.dataTool.gexf.parse(xml);
+            var categories = [];
+            for (var i = 0; i < 9; i++) {
+                categories[i] = {
+                    name: '类目' + i
+                };
+            }
+            graph.nodes.forEach(function (node) {
+                node.itemStyle = null;
+                node.value = node.symbolSize;
+                node.symbolSize /= 1.5;
+
+                node.label = {
+                    normal: {
+                        show: node.symbolSize > 30
+                    }
+                };
+                node.category = node.attributes.modularity_class;
+            });
+            option = {
+                title: {
+                    text: 'Les Miserables',
+                    subtext: 'Default layout',
+                    top: 'bottom',
+                    left: 'right'
+                },
+                tooltip: {},
+                legend: [{
+                    // selectedMode: 'single',
+                    data: categories.map(function (a) {
+                        return a.name;
+                    })
+                }],
+                animationDuration: 1500,
+                animationEasingUpdate: 'quinticInOut',
+                series : [
+                    {
+                        name: 'Les Miserables',
+                        type: 'graph',
+                        layout: 'none',
+                        data: graph.nodes,
+                        links: graph.links,
+                        categories: categories,
+                        roam: true,
+                        focusNodeAdjacency: true,
+                        itemStyle: {
+                            normal: {
+                                borderColor: '#fff',
+                                borderWidth: 1,
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(0, 0, 0, 0.3)'
+                            }
+                        },
+                        label: {
+                            position: 'right',
+                            formatter: '{b}'
+                        },
+                        lineStyle: {
+                            color: 'source',
+                            curveness: 0.3
+                        },
+                        emphasis: {
+                            lineStyle: {
+                                width: 10
+                            }
+                        }
+                    }
+                ]
+            };
+            myChart.setOption(option);
+            myChart.on('click', function (params) {
+                var url = "";
+//                $.get(url).then(function (data) {
+//
+//                }
+                document.getElementById("demo").innerHTML = "Hello World!";
+
+            });
+        }, 'xml');
+
+
+        //    if (option && typeof option === "object") {
+        //        myChart.setOption(option, true);
+        //        myChart.on('click', function (params) {
+        //            window.open('https://www.baidu.com/');
+        //        });
+        //    }
+    </script>
     <!-- Bootstrap core JavaScript -->
-    <script src="startbootstrap-creative-gh-pages/vendor/jquery/jquery.min.js"></script>
+
+    <script src="startbootstrap-creative-gh-pages/vendor/jquery/jquery.min.js"> </script>
     <script src="startbootstrap-creative-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->

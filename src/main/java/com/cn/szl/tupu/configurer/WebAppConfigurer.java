@@ -12,6 +12,8 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
 
     @Autowired
     private LoginInterceptor loginInterceptor;
+
+
     /**
      * 解决用户有效登陆的验证问题
      * @param registry
@@ -38,6 +40,8 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         loginRegistry.excludePathPatterns("/**/*.ico");
         loginRegistry.excludePathPatterns("/**/*.jpg");
         loginRegistry.excludePathPatterns("/**/*.font");
+        loginRegistry.excludePathPatterns("/**/*.png");
+        loginRegistry.excludePathPatterns("/img/**");
 
 
     }

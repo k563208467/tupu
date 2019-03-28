@@ -1,6 +1,7 @@
 package com.cn.szl.tupu.controller;
 
 import com.cn.szl.tupu.entity.User;
+import com.cn.szl.tupu.service.util.RedisUtil;
 import com.cn.szl.tupu.servive.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,9 @@ public class RegisterController {
 
     @Autowired
     private IUserService iUserService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @RequestMapping("/registered")
     public String registered(){
@@ -37,7 +41,6 @@ public class RegisterController {
                 user.setEmail(email);
                 user.setRole(role);
                 iUserService.add(user);
-
                 System.out.println("保存数据成功");
             }else {
                 return "两次输入的密码不符合，请重试";

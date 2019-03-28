@@ -3,8 +3,10 @@ package com.cn.szl.tupu.dao;
 
 import com.cn.szl.tupu.entity.Knowledge;
 import com.cn.szl.tupu.entity.Paper;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
@@ -34,5 +36,4 @@ public interface PaperDao{
     List<Paper> findByKeyword(String keyword);
 
 
-    void saveAndFlush(Paper paper);
 }

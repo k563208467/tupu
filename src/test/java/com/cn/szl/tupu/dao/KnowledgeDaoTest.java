@@ -24,13 +24,13 @@ public class KnowledgeDaoTest {
             "战场环境\n" +
             "指挥与效能评估知识";
 
-        String[] split = s.split("\n");
-        for (int i = 0 ; i < split.length ; i ++){
-            Knowledge knowledge = new Knowledge();
-            knowledge.setKnowledgeLevel("2");
-            knowledge.setKnowledgeName(split[i]);
-            dao.insert(knowledge);
-        }
+//        String[] split = s.split("\n");
+//        for (int i = 0 ; i < split.length ; i ++){
+//            Knowledge knowledge = new Knowledge();
+//            knowledge.setKnowledgeLevel("2");
+//            knowledge.setKnowledgeName(split[i]);
+//            dao.insert(knowledge);
+//        }
 
     }
 }

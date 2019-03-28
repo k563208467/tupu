@@ -4,9 +4,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,38 +23,61 @@ import java.util.Date;
  */
 
 @Data
+@Entity
 public class Knowledge implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     private Integer KnowledgeId;  // 知识id
+
     @Getter
     @Setter
     @NotNull(message = "知识名称不能为空")
     @NotBlank(message = "知识名称不能为空")
-    private String KnowledgeName; // 知识名称
+    private String KnowledgeTitle; // 知识名称
 
     @Getter
     @Setter
-    private Date KnowledgeTime = new Date(); // 知识加入时间
+    @NotNull(message = "知识名称不能为空")
+    @NotBlank(message = "知识名称不能为空")
+    private String KnowledgeType;
+
+    @Getter
+    @Setter
+    private String KnowledgeData;
+
+    @Getter
+    @Setter
+    private String Summary;
+
+    @Getter
+    @Setter
+    @NotNull(message = "知识名称不能为空")
+    @NotBlank(message = "知识名称不能为空")
+    private String Url;
 
     @NotNull(message = "知识层级不能为空")
     @NotBlank(message = "知识层级不能为空")
-    private String KnowledgeLevel; // 知识层级
+    @Getter
+    @Setter
+    private String KnowledgeLevel1; // 知识层级
 
-    public String getKnowledgeName() {
-        return KnowledgeName;
-    }
+    @NotNull(message = "知识层级不能为空")
+    @NotBlank(message = "知识层级不能为空")
+    @Getter
+    @Setter
+    private String KnowledgeLevel2; // 知识层级
 
-    public String getKnowledgeLevel() {
-        return KnowledgeLevel;
-    }
+    @NotNull(message = "知识层级不能为空")
+    @NotBlank(message = "知识层级不能为空")
+    @Getter
+    @Setter
+    private String KnowledgeLevel3; // 知识层级
 
-    public void setKnowledgeLevel(String knowledgeLevel) {
-        this.KnowledgeLevel = knowledgeLevel;
-    }
+    @Getter
+    @Setter
+    private ArrayList<String> relevance;
 
-    public void setKnowledgeName(String knowledgeName) {
-        this.KnowledgeName = knowledgeName;
-    }
+
 }

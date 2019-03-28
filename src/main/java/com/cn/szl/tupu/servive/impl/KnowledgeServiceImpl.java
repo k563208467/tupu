@@ -31,12 +31,13 @@ public class KnowledgeServiceImpl implements IKnowledgeService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Result add(Knowledge knowledge) {
-        Knowledge byNameAndLevel = dao.getByNameAndLevel(knowledge.getKnowledgeName(), knowledge.getKnowledgeLevel());
-        if (null != byNameAndLevel){
-            throw new DuplicateKeyException("数据重复!");
-        }
-        dao.insert(knowledge);
-        return Result.ok();
+//        Knowledge byNameAndLevel = dao.getByNameAndLevel(knowledge.getKnowledgeName(), knowledge.getKnowledgeLevel());
+//        if (null != byNameAndLevel){
+//            throw new DuplicateKeyException("数据重复!");
+//        }
+//        dao.insert(knowledge);
+//        return Result.ok();
+        return null;
     }
 
     @Transactional(rollbackFor = Exception.class)

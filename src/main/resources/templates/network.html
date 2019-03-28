@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html  style="height: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script th:src="@{/js/echarts.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/handlebars-v4.0.12.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+</head>
+
+<body style="height: 100%; margin: 0">
+<div class="container clearfix"></div>
+    <div class="know_right fl" id="container" style="height: 75%"></div>
+<hr>
+    <div class="template-slot col-lg-8 col-md-10 mx-auto" id ="demo">
+
+    </div>
+
+
+
+<script id="post-preview-template" type="text/x-handlebars-template">
+    <div class="post-preview">
+        <h1>{{key}}</h1>
+        <p>{{papers}}</p>
+        <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 18, 2018</p>
+    </div>
+</script>
+<script type="text/javascript">
+    function sendAjax() {
+//        debugger;
+//        var url = '/paper/ajaxSearch';
+//        $.get(url).then(function (data) {
+//            // 获取模板内容
+//            var source = document.getElementById('post-preview-template').innerHTML;
+//            // 编译模板
+//            var template = Handlebars.compile(source);
+//            // 用后端返回的数据"data"填充模板生成html
+//            var html = template(data);
+//            // 将html插入到页面中
+//            var $node = document.createDocumentFragment();
+//            $node.innerHTML = html;
+//            document.querySelector('.template-slot').prepend($node);
+//        })
+        document.getElementById("demo").innerHTML = "Hello World!";
+    }
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    myChart.showLoading();
+    $.get('/data/les-miserables.gexf', function (xml) {
+        myChart.hideLoading();
+
+        var graph = echarts.dataTool.gexf.parse(xml);
+        var categories = [];
+        for (var i = 0; i < 9; i++) {
+            categories[i] = {
+                name: '类目' + i
+            };
+        }
+        graph.nodes.forEach(function (node) {
+            node.itemStyle = null;
+            node.value = node.symbolSize;
+            node.symbolSize /= 1.5;
+
+            node.label = {
+                normal: {
+                    show: node.symbolSize > 30
+                }
+            };
+            node.category = node.attributes.modularity_class;
+        });
+        option = {
+            title: {
+                text: 'Les Miserables',
+                subtext: 'Default layout',
+                top: 'bottom',
+                left: 'right'
+            },
+            tooltip: {},
+            legend: [{
+                // selectedMode: 'single',
+                data: categories.map(function (a) {
+                    return a.name;
+                })
+            }],
+            animationDuration: 1500,
+            animationEasingUpdate: 'quinticInOut',
+            series : [
+                {
+                    name: 'Les Miserables',
+                    type: 'graph',
+                    layout: 'none',
+                    data: graph.nodes,
+                    links: graph.links,
+                    categories: categories,
+                    roam: true,
+                    focusNodeAdjacency: true,
+                    draggable: true,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.3)'
+                        }
+                    },
+                    label: {
+                        position: 'right',
+                        formatter: '{b}'
+                    },
+                    lineStyle: {
+                        color: 'source',
+                        curveness: 0.3
+                    },
+                    emphasis: {
+                        lineStyle: {
+                            width: 10
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+        myChart.on('click', function (params) {
+            var url = "";
+            $.get(url).then(function (data) {
+
+            }
+            document.getElementById("demo").innerHTML = "Hello World!";
+
+        });
+    }, 'xml');
+
+
+//    if (option && typeof option === "object") {
+//        myChart.setOption(option, true);
+//        myChart.on('click', function (params) {
+//            window.open('https://www.baidu.com/');
+//        });
+//    }
+</script>
+</body>
+</html>

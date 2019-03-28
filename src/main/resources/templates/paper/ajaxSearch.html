@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <title>Clean Blog - Start Bootstrap Theme</title>
 
@@ -44,6 +48,34 @@
 
     </script>
   </head>
+  <style>
+    *{
+      margin: 0;
+      padding:0;
+    }
+    .grid{
+      display: flex;
+      border: 1px solid #ccc;
+    }
+    .gridCell1{
+      background-color: #449fdb;
+      flex: 1;
+    }
+    .gridCell2{
+      background-color: #3355D0;
+      flex: 4;
+    }
+    .gridCell3{
+      background-color: #b6d0ba;
+      flex: 1;
+    }
+    .gridCell4{
+      background-color: #d064b9;
+      flex: 1;
+    }
+  </style>
+
+
 
   <body>
 
@@ -106,12 +138,13 @@
     <!-- Main Content -->
     <div class="container">
       <div class="row">
-        <div class="template-slot col-lg-8 col-md-10 mx-auto">
+        <div class="template-slot col-lg-8 col-md-9 mx-auto">
           <h1 class="post=title">
             <p th:text="'搜索的关于    '+ ${key} +'    有如下结果'" />
           </h1>
+          <hr>
 
-          <div th:each="paper:${papers}">
+          <div th:each="paper:${pageInfo.list}">
             <a>
               <a class="post-title" th:href="@{/paper/details(id=${paper.id})}">
                 <h2 th:text="${paper.title}"></h2>
@@ -119,30 +152,69 @@
               <h3 class="post-subtitle" th:text="'关键词： '+${paper.keywords}"></h3>
               <p class="post-meta" th:text="'分类： '+${paper.label} +'        '+'   时间:'+ ${paper.date}"></p>
             </a>
+            <hr>
           </div>
 
+          <nav>
+            <ul class="pagination">
+              <li>
+                <a th:if="${not isFirstPage}" th:href="@{${'search'}(key=${key},pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+                <a th:if="${isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
 
-          <div class="post-preview">
-            <a href="../post.html">
-              <h2 class="post-title">
-                Science has not yet mastered prophecy
-              </h2>
-              <h3 class="post-subtitle">
-                We predict too much for the next year and yet far too little for the next ten.
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on August 24, 2018</p>
-          </div>
+              <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                  <span th:text="${pageNo}"></span>
+                </a>
+
+                <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'search'}(key=${key},pageNum=${pageNo},pageSize=${pageSize})}">
+                  <span th:text="${pageNo}"></span>
+                </a>
+              </li>
+
+              <li>
+                <a th:if="${not isLastPage}" th:href="@{${'search'}(key=${key},pageNum=${pageNum+1},pageSize=${pageSize})}" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+                <a th:if="${isLastPage}" href="javascript:void(0);" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
           <hr>
 
+
+
           <div class="clearfix">
-            <a class="btn btn-primary float-right" href="/main/addNew">Older Posts &rarr;</a>
+            <a class="btn btn-primary float-right" href="/paper/network">Older Posts &rarr;</a>
           </div>
+        </div>
+        <div class="col-md-3">
+          <h2>相关词条</h2>
+          <ul class="nav nav-tabs nav-stacked">
+            <li><a href='#'>Another Link 1</a></li>
+            <li><a href='#'>Another Link 2</a></li>
+            <li><a href='#'>Another Link 3</a></li>
+          </ul>
+
+
+
+          <h2>相关专利</h2>
+          <ul class="nav nav-tabs nav-stacked">
+            <li><a href='#'>Another Link 1</a></li>
+            <li><a href='#'>Another Link 2</a></li>
+            <li><a href='#'>Another Link 3</a></li>
+          </ul>
         </div>
       </div>
     </div>
+
+
 
     <hr>
 
